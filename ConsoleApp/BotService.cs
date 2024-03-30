@@ -46,7 +46,7 @@ public class BotService : IHostedService
     private async Task ClientReady()
     {
         await _interactionService.RegisterCommandsToGuildAsync(413094045384966144);
-        _logger.LogInformation("Bot Ready!");
+        _logger.LogInformation("ConsoleApp Ready!");
     }
 
     private Task Log(LogMessage logMessage)
