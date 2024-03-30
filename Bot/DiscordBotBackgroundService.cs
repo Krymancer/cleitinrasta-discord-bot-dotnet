@@ -35,9 +35,7 @@ public class BotService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
         await _interactionHandler.InitializeAsync();
-
         _prefixHandler.AddModule<PrefixModule>();
-        
         await _prefixHandler.InitializeAsync();
 
         await _discordClient.LoginAsync(TokenType.Bot, _appSettings.Value.Token);
@@ -52,8 +50,8 @@ public class BotService : BackgroundService
 
     private async Task ClientReady()
     {
+        await _interactionService.RegisterCommandsToGuildAsync(413094045384966144, true);
         _logger.LogInformation("Bot Ready!");
-        await _interactionService.RegisterCommandsGloballyAsync(true);
     }
 
     private Task Log(LogMessage logMessage)

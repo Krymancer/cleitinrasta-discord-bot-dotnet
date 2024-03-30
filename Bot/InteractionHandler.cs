@@ -27,8 +27,7 @@ public class InteractionHandler
         await _interactionService.AddModulesAsync(Assembly.GetEntryAssembly(), _serviceProvider);
 
         _discordClient.InteractionCreated += HandleInteraction;
-
-        // Process the command execution results 
+        
         _interactionService.SlashCommandExecuted += SlashCommandExecuted;
         _interactionService.ContextCommandExecuted += ContextCommandExecuted;
         _interactionService.ComponentCommandExecuted += ComponentCommandExecuted;

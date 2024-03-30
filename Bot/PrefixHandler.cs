@@ -25,9 +25,10 @@ public class PrefixHandler
         _commandService.AddModuleAsync<T>(_serviceProvider);
     }
 
-    public async Task InitializeAsync()
+    public Task InitializeAsync()
     {
         _discordClient.MessageReceived += HandleCommandAsync;
+        return Task.CompletedTask;
     }
 
     private async Task HandleCommandAsync(SocketMessage messageParam)
@@ -36,7 +37,7 @@ public class PrefixHandler
 
         var position = 0;
 
-        if (!(message.HasStringPrefix(_appSettings.Value.Token, ref position) ||
+        if (!(message.HasStringPrefix(_appSettings.Value.Prefix, ref position) ||
               message.HasMentionPrefix(_discordClient.CurrentUser, ref position) || message.Author.IsBot)) return;
 
         var context = new SocketCommandContext(_discordClient, message);

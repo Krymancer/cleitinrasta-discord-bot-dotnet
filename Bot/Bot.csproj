@@ -17,10 +17,17 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.2.24128.5" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.0-preview.2.24128.5" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-preview.2.24128.5" />
+      <PackageReference Include="VideoLibrary" Version="3.2.3" />
     </ItemGroup>
 
     <ItemGroup>
       <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="libsodium.dll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="opus.dll">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

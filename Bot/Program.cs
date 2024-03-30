@@ -23,7 +23,7 @@ var builder = new HostBuilder()
         {
             var client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                GatewayIntents = GatewayIntents.GuildMembers,
+                GatewayIntents = GatewayIntents.All,
                 AlwaysDownloadUsers = true
             });
             return client;
@@ -40,9 +40,10 @@ var builder = new HostBuilder()
             return service;
         });
 
+        services.AddSingleton<AudioService>();
         services.AddSingleton<PrefixHandler>();
-        services.AddSingleton<InteractionHandler>();
         services.AddSingleton<InteractionService>();
+        services.AddSingleton<InteractionHandler>();
         services.AddHostedService<BotService>();
     });
 

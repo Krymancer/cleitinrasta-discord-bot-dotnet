@@ -5,7 +5,7 @@ namespace Bot.Modules;
 
 public class PingModule : InteractionModuleBase<SocketInteractionContext>
 {
-    public InteractionService Commands { get; set; }
+    public InteractionService? Commands { get; set; }
 
     private readonly ILogger<PingModule> _logger;
 
