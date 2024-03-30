@@ -1,31 +1,23 @@
-﻿using Discord;
+﻿using Application.Services;
+using Discord;
 using Discord.Interactions;
-using Microsoft.Extensions.Logging;
 using Discord.WebSocket;
+using Microsoft.Extensions.Logging;
 using VideoLibrary;
 
+namespace Commands.SlashCommands;
 
-namespace Bot.Modules;
-
-public class PlayerModule : InteractionModuleBase<SocketInteractionContext>
+public class PlayerModule(ILogger<PlayerModule> logger, DiscordSocketClient client, AudioService audioService)
+    : InteractionModuleBase<SocketInteractionContext>
 {
     public InteractionService? Commands { get; set; }
 
-    private readonly ILogger<PlayerModule> _logger;
-    private readonly DiscordSocketClient _discordClient;
-    private readonly AudioService _audioService;
-
-    public PlayerModule(ILogger<PlayerModule> logger, DiscordSocketClient client, AudioService audioService)
-    {
-        _logger = logger;
-        _discordClient = client;
-        _audioService = audioService;
-    }
+    private readonly DiscordSocketClient _discordClient = client;
 
     [SlashCommand("play", "Play a song")]
     public async Task Play([Summary("url", "The video url to play")] string url)
     {
-        _logger.LogInformation("User: {user}, Command: play, parameter: {url}", Context.User.Username, url);
+        logger.LogInformation("User: {user}, Command: play, parameter: {url}", Context.User.Username, url);
 
         var streamUrl = await GetAudioStreamUrl(url);
 
@@ -45,7 +37,7 @@ public class PlayerModule : InteractionModuleBase<SocketInteractionContext>
         }
 
         await RespondAsync("Playing Now!");
-        await _audioService.PlayAudioAsync(voiceChannel, streamUrl);
+        await audioService.PlayAudioAsync(voiceChannel, streamUrl);
     }
 
     private async Task<string> GetAudioStreamUrl(string url)
@@ -60,7 +52,7 @@ public class PlayerModule : InteractionModuleBase<SocketInteractionContext>
 
             if (audio is null)
             {
-                _logger.LogError("Error trying to get audio from youtube video");
+                logger.LogError("Error trying to get audio from youtube video");
                 return string.Empty;
             }
             
@@ -68,7 +60,7 @@ public class PlayerModule : InteractionModuleBase<SocketInteractionContext>
         }
         catch (Exception exception)
         {
-            _logger.LogError(exception, "Error retrieving audio stream URL from YouTube: {exception}", exception);
+            logger.LogError(exception, "Error retrieving audio stream URL from YouTube: {exception}", exception);
             return string.Empty;
         }
     }

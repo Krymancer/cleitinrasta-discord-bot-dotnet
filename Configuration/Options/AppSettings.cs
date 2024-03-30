@@ -1,4 +1,4 @@
-﻿namespace Bot;
+﻿namespace Configuration.Options;
 
 public class AppSettings
 {

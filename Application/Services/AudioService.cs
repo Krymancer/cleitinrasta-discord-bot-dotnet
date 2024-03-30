@@ -4,18 +4,11 @@ using Discord.Audio;
 using Discord.WebSocket;
 using Microsoft.Extensions.Logging;
 
-namespace Bot;
+namespace Application.Services;
 
-public class AudioService
+public class AudioService(DiscordSocketClient client, ILogger<AudioService> logger)
 {
-    private readonly ILogger<AudioService> _logger;
-    private readonly DiscordSocketClient _client;
-
-    public AudioService(DiscordSocketClient client, ILogger<AudioService> logger)
-    {
-        _client = client;
-        _logger = logger;
-    }
+    private readonly DiscordSocketClient _client = client;
 
     public async Task PlayAudioAsync(IVoiceChannel voiceChannel, string audioUrl)
     {
@@ -37,7 +30,7 @@ public class AudioService
         }
         catch (Exception exception)
         {
-            _logger.LogError("Error playing audio: {message}", exception.Message);
+            logger.LogError("Error playing audio: {message}", exception.Message);
         }
     }
 

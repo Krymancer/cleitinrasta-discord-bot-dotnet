@@ -1,15 +1,16 @@
-﻿using Bot.Modules;
+﻿using Commands.PrefixCommands;
+using Configuration.Options;
 using Discord;
 using Discord.WebSocket;
-using Discord.Commands;
 using Discord.Interactions;
+using Handlers;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Bot;
 
-public class BotService : BackgroundService
+public class BotService : IHostedService
 {
     private readonly DiscordSocketClient _discordClient;
     private readonly ILogger<BotService> _logger;
@@ -32,7 +33,7 @@ public class BotService : BackgroundService
         _discordClient.Ready += ClientReady;
     }
 
-    protected override async Task ExecuteAsync(CancellationToken cancellationToken)
+    public async Task StartAsync(CancellationToken cancellationToken)
     {
         await _interactionHandler.InitializeAsync();
         _prefixHandler.AddModule<PrefixModule>();
@@ -40,17 +41,11 @@ public class BotService : BackgroundService
 
         await _discordClient.LoginAsync(TokenType.Bot, _appSettings.Value.Token);
         await _discordClient.StartAsync();
-
-        while (!cancellationToken.IsCancellationRequested)
-        {
-        }
-
-        await _discordClient.StopAsync();
     }
 
     private async Task ClientReady()
     {
-        await _interactionService.RegisterCommandsToGuildAsync(413094045384966144, true);
+        await _interactionService.RegisterCommandsToGuildAsync(413094045384966144);
         _logger.LogInformation("Bot Ready!");
     }
 
@@ -58,5 +53,11 @@ public class BotService : BackgroundService
     {
         _logger.LogInformation("Discord.Net Log: {message}", logMessage.ToString());
         return Task.CompletedTask;
+    }
+
+    public async Task StopAsync(CancellationToken cancellationToken)
+    {
+        await _discordClient.LogoutAsync();
+        await _discordClient.StopAsync();
     }
 }
