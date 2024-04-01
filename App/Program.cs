@@ -10,17 +10,7 @@ using NetCord.Services.Commands;
 using Lavalink4NET.NetCord;
 
 var builder = Host.CreateDefaultBuilder(args)
-    .UseDiscordGateway(options =>
-    {
-        options.Configuration = new()
-        {
-            Intents = GatewayIntents.GuildMessages
-                      | GatewayIntents.DirectMessages
-                      | GatewayIntents.MessageContent
-                      | GatewayIntents.DirectMessageReactions
-                      | GatewayIntents.GuildMessageReactions,
-        };
-    })
+    .UseDiscordGateway()
     .UseLavalink()
     .UseApplicationCommands<SlashCommandInteraction, SlashCommandContext>()
     .UseApplicationCommands<UserCommandInteraction, UserCommandContext>()
