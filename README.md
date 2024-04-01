@@ -11,14 +11,9 @@ Para poder utilizar o bot é necessário editar o arquivo `appsettings.json` na 
 
 ```json
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information"
-    }
-  },
-  "AppSettings": {
+  "Discord": {
     "Token": "SEU TOKEN DO BOT DO DISCORD, pegue na aba de bot do seu bot no discord developer portal",
-    "Prefix": "SEU Prefixo, pode ser qualquer coisa, recomendo que evite prefixes de outros bots, eu costumo usar dj!"
+    "Prefix" : "SEU Prefixo, pode ser qualquer coisa, recomendo que evite prefixes de outros bots, eu costumo usar &"
   }
 }
 ```
