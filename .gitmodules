@@ -1,0 +1,3 @@
+[submodule "extern/Lavalink4NET"]
+	path = extern/Lavalink4NET
+	url = git@github.com:Pannoniae/Lavalink4NET.git

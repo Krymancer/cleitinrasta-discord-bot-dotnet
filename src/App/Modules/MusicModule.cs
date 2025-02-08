@@ -1,7 +1,7 @@
 ﻿using Lavalink4NET;
 using Lavalink4NET.Extensions;
-using Lavalink4NET.NetCord;
 using Lavalink4NET.Players;
+using Lavalink4NET.NetCord;
 using Lavalink4NET.Rest.Entities.Tracks;
 using NetCord.Services.ApplicationCommands;
 
@@ -26,14 +26,14 @@ public class MusicModule(IAudioService audioService) : ApplicationCommandModule<
 
         if (tracksResult.IsPlaylist)
         {
-            foreach (var track  in tracksResult.Tracks)
+            foreach (var track in tracksResult.Tracks)
             {
                 await player.PlayAsync(track);
             }
 
             return $"Added {tracksResult.Tracks.Length} to the queue";
         }
-        
+
         await player.PlayAsync(tracksResult);
 
         return $"Playing: {player.CurrentTrack?.Title}";

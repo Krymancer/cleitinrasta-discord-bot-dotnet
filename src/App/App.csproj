@@ -8,12 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Lavalink4NET.Integrations.Lavasearch" Version="4.0.19-beta.2" />
-      <PackageReference Include="Lavalink4NET.NetCord" Version="4.0.18" />
+      <PackageReference Include="Lavalink4NET.Integrations.Lavasearch" Version="4.0.25" />
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0-preview.2.24128.5" />
-      <PackageReference Include="NetCord" Version="1.0.0-alpha.279" />
-      <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.49" />
-      <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.58" />
+      <PackageReference Include="NetCord" Version="1.0.0-alpha.345" />
+      <PackageReference Include="NetCord.Hosting" Version="1.0.0-alpha.345" />
+      <PackageReference Include="NetCord.Hosting.Services" Version="1.0.0-alpha.345" />
+      <PackageReference Include="NetCord.Services" Version="1.0.0-alpha.345" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="../../extern/Lavalink4NET/src/Lavalink4NET/Lavalink4NET.csproj" />
+      <ProjectReference Include="../../extern/Lavalink4NET/src/Lavalink4NET.NetCord/Lavalink4NET.NetCord.csproj" />
     </ItemGroup>
 
     <ItemGroup>

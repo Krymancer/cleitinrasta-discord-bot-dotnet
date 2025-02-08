@@ -17,6 +17,9 @@ plugins:
       - WEB
       - WEBEMBEDDED
 lavalink:
+   plugins:
+    - dependency: dev.lavalink.youtube:youtube-plugin:aa35b841ec3ad4f4865e4bcd4d1e6c539b822687
+      snapshot: true
    server:
     password: "youshallnotpass"
     sources:
